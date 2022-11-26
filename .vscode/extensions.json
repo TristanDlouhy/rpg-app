@@ -1,0 +1,22 @@
+{
+  "recommendations": [
+    "aaron-bond.better-comments",
+    "angular.ng-template",
+    "codezombiech.gitignore",
+    "cyrilletuzi.angular-schematics",
+    "dbaeumer.vscode-eslint",
+    "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "fernandoescolar.vscode-solution-explorer",
+    "firsttris.vscode-jest-runner",
+    "jchannon.csharpextensions",
+    "mechatroner.rainbow-csv",
+    "mohsen1.prettify-json",
+    "ms-dotnettools.csharp",
+    "nrwl.angular-console",
+    "oderwat.indent-rainbow",
+    "syler.sass-indented",
+    "yzhang.markdown-all-in-one",
+    "ms-azuretools.vscode-docker"
+  ]
+}

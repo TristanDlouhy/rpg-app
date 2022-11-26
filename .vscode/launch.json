@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "RPG API debug",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/dist/apps/rpg-api/net7.0/rpg-api.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/apps/rpg-api",
+      "stopAtEntry": false,
+      "console": "internalConsole"
+    }
+  ],
+  "compounds": []
+}
