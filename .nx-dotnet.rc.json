@@ -2,9 +2,8 @@
   "nugetPackages": {
     "AutoMapper": "",
     "Swashbuckle.AspNetCore.Annotations": "",
-    "MySql.Data.EntityFramework": "",
-    "MySql.EntityFrameworkCore": "",
     "Moq": "",
-    "AutoFixture.AutoMoq": ""
+    "AutoFixture.AutoMoq": "",
+    "Pomelo.EntityFrameworkCore.MySql": ""
   }
 }
