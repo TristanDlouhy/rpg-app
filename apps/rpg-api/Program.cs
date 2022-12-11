@@ -1,4 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using RpgApi.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Add db context
+builder.Services.AddDbContext<DataContext>();
 
 // Add services to the container.
 
