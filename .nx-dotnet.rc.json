@@ -4,6 +4,7 @@
     "Swashbuckle.AspNetCore.Annotations": "",
     "Moq": "",
     "AutoFixture.AutoMoq": "",
-    "Pomelo.EntityFrameworkCore.MySql": ""
+    "Pomelo.EntityFrameworkCore.MySql": "",
+    "AutoMapper.Extensions.Microsoft.DependencyInjection": ""
   }
 }

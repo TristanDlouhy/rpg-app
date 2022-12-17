@@ -1,21 +1,17 @@
-using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using RpgApi.Models;
 
-namespace RpgApi.Models;
+namespace RpgApi.Dtos;
 
-public record Character
+public record CreateCharacterDto
 {
-	[Key]
-	public string Id { get; set; } = Guid.NewGuid().ToString();
-	[Required]
+	public string Id { get; } = Guid.NewGuid().ToString();
+	[JsonRequired]
 	public string Name { get; set; } = "";
-	[Required]
 	public int Health { get; set; } = 100;
-	[Required]
 	public int Strength { get; set; } = 10;
-	[Required]
 	public int Defence { get; set; } = 10;
-	[Required]
 	public int Intelligence { get; set; } = 10;
-	[Required]
+	[JsonRequired]
 	public RpgClass Class { get; set; } = RpgClass.Samurai;
 }

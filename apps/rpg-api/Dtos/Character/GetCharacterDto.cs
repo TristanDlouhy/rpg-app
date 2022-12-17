@@ -1,21 +1,14 @@
-using System.ComponentModel.DataAnnotations;
+using RpgApi.Models;
 
-namespace RpgApi.Models;
+namespace RpgApi.Dtos;
 
-public record Character
+public record GetCharacterDto
 {
-	[Key]
 	public string Id { get; set; } = Guid.NewGuid().ToString();
-	[Required]
 	public string Name { get; set; } = "";
-	[Required]
 	public int Health { get; set; } = 100;
-	[Required]
 	public int Strength { get; set; } = 10;
-	[Required]
 	public int Defence { get; set; } = 10;
-	[Required]
 	public int Intelligence { get; set; } = 10;
-	[Required]
 	public RpgClass Class { get; set; } = RpgClass.Samurai;
 }
