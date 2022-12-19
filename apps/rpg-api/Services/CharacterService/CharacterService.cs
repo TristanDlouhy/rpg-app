@@ -30,6 +30,15 @@ public class CharacterService : ICharacterService
 		return response;
 	}
 
+	public async Task<ServiceResponse<GetCharacterDto>> GetCharacterBy(string id)
+	{
+		var response = new ServiceResponse<GetCharacterDto>();
+		var character = await _context.Characters.FirstOrDefaultAsync(c => c.Id == id);
+		response.Data = _mapper.Map<GetCharacterDto>(character);
+
+		return response;
+	}
+
 	public async Task<ServiceResponse<List<GetCharacterDto>>> AddCharacter(CreateCharacterDto newCharacter)
 	{
 		var response = new ServiceResponse<List<GetCharacterDto>>();

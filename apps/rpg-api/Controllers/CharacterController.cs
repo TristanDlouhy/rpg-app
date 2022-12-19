@@ -25,7 +25,11 @@ public class CharacterController : ControllerBase
 		return Ok(await _characterService.AddCharacter(newCharacter));
 	}
 	{
-		return Ok();
+
+	[HttpGet("{id}")]
+	public async Task<IActionResult> Get(string id)
+	{
+		return Ok(await _characterService.GetCharacterBy(id));
 	}
 
 	[HttpGet("get-all")]
