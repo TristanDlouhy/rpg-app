@@ -48,4 +48,29 @@ public class CharacterControllerTest
 		Assert.Equal(response, resultResponse);
 		Assert.Equal(3, resultResponse?.Data?.Count);
 	}
+
+	[Fact]
+	public async Task GET_AllCharacters_OK()
+	{
+		var characters = _fixture.CreateMany<GetCharacterDto>(20).ToList();
+
+		var response = new ServiceResponse<List<GetCharacterDto>>();
+		response.Data = characters;
+
+		_mockService.Setup(s => s.GetAllCharacters())
+			.ReturnsAsync(response);
+
+		_controller = new CharacterController(
+			_mockLogger.Object,
+			_mockService.Object
+		);
+
+		var result = await _controller.GetAll();
+		var objectResult = result as ObjectResult;
+		var resultResponse = objectResult?.Value as ServiceResponse<List<GetCharacterDto>>;
+
+		Assert.Equal(200, objectResult?.StatusCode);
+		Assert.Equal(response, resultResponse);
+		Assert.Equal(20, resultResponse?.Data?.Count);
+	}
 }

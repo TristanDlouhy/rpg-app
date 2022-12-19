@@ -19,6 +19,16 @@ public class CharacterService : ICharacterService
 		_context = context;
 	}
 
+	public async Task<ServiceResponse<List<GetCharacterDto>>> GetAllCharacters()
+	{
+		var response = new ServiceResponse<List<GetCharacterDto>>();
+		var characters = await _context.Characters.ToListAsync();
+		response.Data = characters
+			.Select(c => _mapper.Map<GetCharacterDto>(c))
+			.ToList();
+
+		return response;
+	}
 
 	public async Task<ServiceResponse<List<GetCharacterDto>>> AddCharacter(CreateCharacterDto newCharacter)
 	{

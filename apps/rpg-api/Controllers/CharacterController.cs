@@ -28,4 +28,9 @@ public class CharacterController : ControllerBase
 		return Ok();
 	}
 
+	[HttpGet("get-all")]
+	public async Task<IActionResult> GetAll()
+	{
+		return Ok(await _characterService.GetAllCharacters());
+	}
 }
