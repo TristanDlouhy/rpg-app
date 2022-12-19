@@ -33,4 +33,32 @@ public class DataContext : DbContext
 
 		options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 	}
+
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
+	{
+		base.OnModelCreating(modelBuilder);
+
+		modelBuilder.Entity<Character>().HasData(
+			new Character
+			{
+				Id = Guid.NewGuid().ToString(),
+				Name = "Benag",
+				Health = 100,
+				Strength = 10,
+				Defence = 15,
+				Intelligence = 30,
+				Class = RpgClass.WhiteMage
+			},
+			new Character
+			{
+				Id = Guid.NewGuid().ToString(),
+				Name = "Amrier",
+				Health = 150,
+				Strength = 20,
+				Defence = 20,
+				Intelligence = 15,
+				Class = RpgClass.Monk
+			}
+		);
+	}
 }
