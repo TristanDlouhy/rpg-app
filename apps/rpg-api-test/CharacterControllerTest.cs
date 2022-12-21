@@ -1,4 +1,5 @@
 using AutoFixture;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -15,12 +16,16 @@ public class CharacterControllerTest
 	private Fixture _fixture;
 	private Mock<ICharacterService> _mockService;
 	private Mock<ILogger<CharacterController>> _mockLogger;
+	private IMapper _mapper;
 
 	public CharacterControllerTest()
 	{
 		_fixture = new Fixture();
 		_mockLogger = new Mock<ILogger<CharacterController>>();
 		_mockService = new Mock<ICharacterService>();
+		// AutoMapper setup
+		var config = new MapperConfiguration(cfg => cfg.AddProfile<AutoMapperProfile>());
+		_mapper = config.CreateMapper();
 	}
 
 	[Fact]
@@ -91,6 +96,31 @@ public class CharacterControllerTest
 		);
 
 		var result = await _controller.Get(character.Id);
+		var objectResult = result as ObjectResult;
+		var resultResponse = objectResult?.Value as ServiceResponse<GetCharacterDto>;
+
+		Assert.Equal(200, objectResult?.StatusCode);
+		Assert.Equal(response, resultResponse);
+	}
+
+	[Fact]
+	public async Task PUT_UpdateCharacter_OK()
+	{
+		var updateCharacter = _fixture.Create<UpdateCharacterDto>();
+		var response = new ServiceResponse<GetCharacterDto>();
+		response.Data = _mapper.Map<GetCharacterDto>(
+			_mapper.Map<Character>(updateCharacter)
+		);
+
+		_mockService.Setup(s => s.UpdateCharacter(updateCharacter))
+			.ReturnsAsync(response);
+
+		_controller = new CharacterController(
+			_mockLogger.Object,
+			_mockService.Object
+		);
+
+		var result = await _controller.UpdateCharacter(updateCharacter);
 		var objectResult = result as ObjectResult;
 		var resultResponse = objectResult?.Value as ServiceResponse<GetCharacterDto>;
 

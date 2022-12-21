@@ -52,4 +52,25 @@ public class CharacterService : ICharacterService
 
 		return response;
 	}
+
+	public async Task<ServiceResponse<GetCharacterDto>> UpdateCharacter(UpdateCharacterDto updateCharacter)
+	{
+		var response = new ServiceResponse<GetCharacterDto>();
+
+		try
+		{
+			var character = await _context.Characters.
+				FirstOrDefaultAsync(c => c.Id == updateCharacter.Id);
+			_mapper.Map(updateCharacter, character);
+			await _context.SaveChangesAsync();
+			response.Data = _mapper.Map<GetCharacterDto>(character);
+		}
+		catch (Exception e)
+		{
+			response.Success = false;
+			response.Message = e.Message;
+		}
+
+		return response;
+	}
 }

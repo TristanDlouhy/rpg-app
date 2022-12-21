@@ -2,12 +2,14 @@ using AutoMapper;
 using RpgApi.Dtos;
 using RpgApi.Models;
 
-namespace rpgapi;
+namespace RpgApi;
 
 public class AutoMapperProfile : Profile
 {
 	public AutoMapperProfile()
 	{
+		CreateMap<Character, GetCharacterDto>();
 		CreateMap<CreateCharacterDto, Character>();
+		CreateMap<UpdateCharacterDto, Character>();
 	}
 }
