@@ -26,6 +26,19 @@ public class CharacterController : ControllerBase
 	}
 	{
 
+	[HttpPut]
+	public async Task<IActionResult> UpdateCharacter(UpdateCharacterDto updateCharacter)
+	{
+		var response = await _characterService.UpdateCharacter(updateCharacter);
+
+		if (response.Data is null)
+		{
+			return NotFound(response);
+		}
+
+		return Ok(response);
+	}
+
 	[HttpGet("{id}")]
 	public async Task<IActionResult> Get(string id)
 	{
