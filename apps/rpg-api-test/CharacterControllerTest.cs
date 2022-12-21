@@ -127,4 +127,30 @@ public class CharacterControllerTest
 		Assert.Equal(200, objectResult?.StatusCode);
 		Assert.Equal(response, resultResponse);
 	}
+
+	[Fact]
+	public async Task DELETE_DeleteCharacter_OK()
+	{
+		var characterId = Guid.NewGuid().ToString();
+		var characters = _fixture.CreateMany<GetCharacterDto>(13).ToList();
+
+		var response = new ServiceResponse<List<GetCharacterDto>>();
+		response.Data = characters;
+
+		_mockService.Setup(s => s.DeleteCharacter(characterId))
+			.ReturnsAsync(response);
+
+		_controller = new CharacterController(
+			_mockLogger.Object,
+			_mockService.Object
+		);
+
+		var result = await _controller.DeleteCharacter(characterId);
+		var objectResult = result as ObjectResult;
+		var resultResponse = objectResult?.Value as ServiceResponse<List<GetCharacterDto>>;
+
+		Assert.Equal(200, objectResult?.StatusCode);
+		Assert.Equal(response, resultResponse);
+		Assert.Equal(13, resultResponse?.Data?.Count);
+	}
 }

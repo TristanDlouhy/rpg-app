@@ -24,7 +24,19 @@ public class CharacterController : ControllerBase
 	{
 		return Ok(await _characterService.AddCharacter(newCharacter));
 	}
+
+	[HttpDelete("{id}")]
+	public async Task<IActionResult> DeleteCharacter(string id)
 	{
+		var response = await _characterService.DeleteCharacter(id);
+
+		if (response.Data is null)
+		{
+			return NotFound(response);
+		}
+
+		return Ok(response);
+	}
 
 	[HttpPut]
 	public async Task<IActionResult> UpdateCharacter(UpdateCharacterDto updateCharacter)
